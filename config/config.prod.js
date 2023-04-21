@@ -14,9 +14,7 @@ const configProd = {
   DB_URL: process.env.PROD_DB_URL,
   DB_PASSWORD: process.env.PROD_DB_PASSWORD,
   JWT_ACTIVATE: process.env.PROD_JWT_ACTIVATE,
-  REDIS_HOST: process.env.DEV_REDIS_HOST,
-  REDIS_PASSWORD: process.env.DEV_REDIS_PASSWORD,
-  REDIS_PORT: process.env.DEV_REDIS_PORT,
+  REDIS_URL: process.env.PROD_REDIS_URL,
 };
 
 export default configProd;
