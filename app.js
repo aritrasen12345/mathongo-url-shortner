@@ -10,12 +10,12 @@ import mongoSanitize from "express-mongo-sanitize";
 import { fileURLToPath } from "url";
 import path, { dirname } from "node:path";
 
-// import { globalErrorHandler } from "./utils/errorHandler.js";
+import { globalErrorHandler } from "./utils/errorHandler.js";
 
 const __filename = fileURLToPath(import.meta.url);
 const __dirname = dirname(__filename);
 
-// import testApis from "./apis/testApis.js";
+import testApis from "./apis/testApis.js";
 
 // App and Middleware
 const app = express();
@@ -70,10 +70,10 @@ const limiter = rateLimit({
 
 app.use(limiter);
 
-// app.use("/api/test", testApis);
+app.use("/api/v1/test", testApis);
 
 // ERROR HANDLING MIDDLEWARE
-// app.use(globalErrorHandler);
+app.use(globalErrorHandler);
 
 // 404 MIDDLEWARE
 app.use((req, res, next) => {
