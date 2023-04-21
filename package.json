@@ -1,0 +1,11 @@
+{
+  "name": "mathongo-url-shortner",
+  "version": "1.0.0",
+  "description": "This is an Assignment Project of MathonGo for the role of Backend Intern Summer'23 Internship.",
+  "main": "app.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "author": "Aritra Sen",
+  "license": "ISC"
+}
