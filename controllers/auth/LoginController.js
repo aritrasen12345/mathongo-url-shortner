@@ -1,7 +1,13 @@
 import JWT from "jsonwebtoken";
 import bcrypt from "bcrypt";
 
+// Import Redis Client
+import client from "../../redis.js";
+
+// Import DB Models
 import User from "../../models/User.js";
+
+// Import Config
 import config from "../../config/config.js";
 
 const logInController = async (req, res, next) => {
@@ -36,6 +42,15 @@ const logInController = async (req, res, next) => {
     const token = JWT.sign({ id: foundUser._id }, config.JWT_ACTIVATE, {
       expiresIn: "7d",
     });
+
+    // Store UserId and Count(default=0) inside redis
+    const userKey = JSON.stringify(foundUser._id);
+
+    // Check if It's already there or not
+    const foundKey = await client.get(userKey);
+    if (!foundKey) {
+      await client.set(userKey, 0, "EX", 3600);
+    }
 
     // If everything works fine then return Authentication Successful
     return res.status(200).json({

@@ -7,14 +7,24 @@ import { isAuthenticated } from "../middlewares/isAuth.js";
 import { errorHandler } from "../utils/errorHandler.js";
 
 // Import Controllers
-import urlController from "../controllers/url/urlController.js";
+import generateURLController from "../controllers/url/generateURLController.js";
+import fetchURLController from "../controllers/url/fetchURLController.js";
 
 const router = express.Router();
 
 router.post(
-  "/fetch",
+  "/generate",
   [body("url").isURL().withMessage("Invalid URL")],
   errorHandler,
   isAuthenticated,
-  urlController
+  generateURLController
 );
+
+router.post(
+  "/fetch",
+  [body("shorturl").isURL().withMessage("Invalid URL")],
+  errorHandler,
+  fetchURLController
+);
+
+export default router;

@@ -1,5 +1,9 @@
 import bcrypt from "bcrypt";
 
+// Import Redis Client
+import client from "../../redis.js";
+
+// Import User Model
 import User from "../../models/User.js";
 
 const signUpController = async (req, res, next) => {
