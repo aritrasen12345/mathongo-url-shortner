@@ -5,7 +5,7 @@ const testServer = async (req, res, next) => {
       message: "Hello from test server",
     });
   } catch (err) {
-    console.log(err);
+    // console.log(err);
     res.status(500).json({
       status: false,
       message: "server error!",

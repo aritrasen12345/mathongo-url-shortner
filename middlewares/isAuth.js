@@ -12,9 +12,9 @@ export const isAuthenticated = async (req, res, next) => {
     }
 
     const token = req.get("Authorization").split(" ")[1];
-    console.log(token);
+    // console.log(token);
     const decoded = Jwt.verify(token, config.JWT_ACTIVATE);
-    console.log(decoded);
+    // console.log(decoded);
     if (!decoded) {
       res.status(401).json({
         status: false,

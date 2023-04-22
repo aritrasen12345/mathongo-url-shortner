@@ -7,6 +7,4 @@ const generateUniqueId = (count = 6) => {
   return nanoid();
 };
 
-console.log(generateUniqueId());
-
 export default generateUniqueId;

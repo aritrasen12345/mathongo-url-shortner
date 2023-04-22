@@ -14,8 +14,8 @@ const generateURLController = async (req, res, next) => {
     const userId = req.userId;
 
     // Check if User's Count is Greater Than Equal to 10, the throw Error User's Maximum Url Generate Capacity Exceeded.
-    const UserKey = JSON.stringify(userId);
-    const userCount = await client.get(UserKey);
+    const userKey = JSON.stringify(userId);
+    const userCount = await client.get(userKey);
 
     if (userCount >= 10) {
       return res.status(404).json({
@@ -64,11 +64,25 @@ const generateURLController = async (req, res, next) => {
     // Store that into DB
     await newShortURL.save();
 
-    // Increment User Count in Redis Cache
-    const userKey = JSON.stringify(req.userId);
+    // Also Store the Url into User's url Array
+    await User.findOneAndUpdate(
+      { _id: req.userId },
+      {
+        $push: { urls: newShortURL._id },
+      },
+      { new: true }
+    );
+
+    // Set the User count in Redis Cache
     let userCacheValue = await client.get(userKey);
-    userCacheValue++;
-    await client.set(userKey, userCacheValue, "KEEPTTL");
+    // If UserId not present inside Cache, Set the userId, Else Increment the count
+    if (!userCacheValue) {
+      await client.set(userKey, 1, "EX", 3600);
+    } else {
+      // Increment User Count in Redis Cache
+      userCacheValue++;
+      await client.set(userKey, userCacheValue, "KEEPTTL");
+    }
 
     // If everything works fine then return URL Generated Successfully
     return res.status(200).json({
