@@ -1,6 +1,6 @@
 <a href="https://documenter.getpostman.com/view/17955962/2s93Y5NeRn">POSTMAN DOCUMENTATION</a>
 
-<a href="https://documenter.getpostman.com/view/17955962/2s93Y5NeRn">AWS EC2 Endpoint</a>
+<a href="http://3.110.45.205/">AWS EC2 Endpoint</a>
 
 <a href="https://github.com/aritrasen12345/mathongo-url-shortner">GitHub Repo</a>
 
