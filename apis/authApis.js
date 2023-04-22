@@ -1,8 +1,10 @@
 import express from "express";
 import { body } from "express-validator";
+
+// Import ErrorHandler Utility Middleware
 import { errorHandler } from "../utils/errorHandler.js";
 
-// Import controllers
+// Import Controllers
 import logInController from "../controllers/auth/LoginController.js";
 import signUpController from "../controllers/auth/SignUpController.js";
 
