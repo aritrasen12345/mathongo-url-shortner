@@ -28,4 +28,11 @@ jobs:
 
     - run: npm ci
     - run: npm run build --if-present
+    - run: touch .env
+    - run: echo PROD_PORT=${{ secrets.PROD_PORT }} >> .env
+    - run: echo PROD_DB_NAME=${{ secrets.PROD_DB_NAME }} >> .env
+    - run: echo PROD_DB_URL=${{ secrets.PROD_DB_URL }} >> .env
+    - run: echo PROD_DB_PASSWORD=${{ secrets.PROD_DB_PASSWORD }} >> .env
+    - run: echo PROD_JWT_ACTIVATE=${{ secrets.PROD_JWT_ACTIVATE }} >> .env
+    - run: echo PROD_REDIS_URL=${{ secrets.PROD_REDIS_URL }} >> .env
     - run: pm2 restart server.js
